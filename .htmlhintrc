@@ -2,5 +2,6 @@
   "tagname-lowercase": true,
   "attr-lowercase": true,
   "attr-value-double-quotes": true,
-  "id-unique": true
+  "id-unique": true,
+  "tag-pair": true
 }
