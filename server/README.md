@@ -43,10 +43,6 @@ source myenv/bin/activate
 ## 4. Install dependencies
 ```sh
 pip install -r requirements.txt
-
-**Windows & Mac/Linux:**
-```sh
-pip install -r requirements.txt
 ```
 
 ---
