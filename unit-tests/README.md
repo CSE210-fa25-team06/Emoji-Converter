@@ -18,6 +18,10 @@ This repository contains the automated test suite for the emoji to text translat
 | **`test-utils/test-suites/run-all-tests.js`** | The main executable script that imports and runs all individual test suites. |
 | **`test-utils/test-suites/emoji-test.js`** | Test suite for the **emoji to text** translation function. |
 | **`test-utils/test-suites/text-test.js`** | Test suite for the **text to emoji** translation function. |
+| **`test-utils/test-suites/multi-emoji-test.js`** | Test suite for multi-emoji translation. |
+| **`test-utils/test-suites/mixed-content-to-text-test.js`** | Test suite for translating mixed content (containing both emoji and text) to text |
+| **`test-utils/test-suites/text-to-mixed-content-test.js`** | Test suite for translating text to mixed content |
+| **`test-utils/test-suites/edge-cases-test.js`** | Test suite for edge cases including null value, empty string, and invalid emoji inputs|
 | **`test-utils/emoji-dataset/emoji_tts.json`** | The emoji to text dataset. |
 
 ## Running the Test Suite
