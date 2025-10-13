@@ -23,4 +23,4 @@ jobs:
         run: npm install -g eslint @eslint/js
 
       - name: Run ESLint
-        run: eslint "**/*.js" || true
+        run: eslint "**/*.js"
