@@ -5,7 +5,11 @@
 	"scripts": {
 		"run-all-tests": "node ./test-utils/test-suites/run-all-tests.js",
 		"run-emoji-tests": "node ./test-utils/test-suites/emoji-test.js",
-		"run-text-tests": "node ./test-utils/test-suites/text-test.js"
+		"run-text-tests": "node ./test-utils/test-suites/text-test.js",
+		"run-edge-case-tests": "node ./test-utils/test-suites/edge-cases-test.js",
+		"run-mixed-content-to-text-tests": "node ./test-utils/test-suites/mixed-content-to-text-test.js",
+		"run-text-to-mixed-content-tests": "node ./test-utils/test-suites/text-to-mixed-content-test.js",
+		"run-multi-emoji-tests": "node ./test-utils/test-suites/multi-emoji-test.js"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.2.5"
