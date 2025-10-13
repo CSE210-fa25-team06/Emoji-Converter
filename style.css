@@ -1,14 +1,9 @@
 /* style.css */
 body {
   font-family: Arial, sans-serif;
-  background-color: #d2fffe /* Test error: Missing semicolon */
+  background-color: #d2fffe;
 }
 
 h1 {
   color: #333;
-}
-
-/* Test error: Empty block */
-.unused-class {
-
 }
