@@ -18,9 +18,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
-      - name: Install ESLint (v9)
-        run: npm install -g eslint @eslint/js
+      - name: Install dependencies
+        run: npm ci
 
       - name: Run ESLint
-        run: eslint "**/*.js"
+        run: npx eslint "**/*.js"
