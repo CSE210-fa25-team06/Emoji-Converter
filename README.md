@@ -11,7 +11,7 @@ Emoji-Converter for Team06 @ CSE210 Fall 2025.
 
 ### **Backend / API**
 **Description:** Implements the core emoji to text conversion and manages the translation logic.  
-**Members:** Lei, Akshay, Tej  
+**Members:** Lei, Akshay, Tej, Adam
 
 ---
 
