@@ -1,60 +1,30 @@
 from flask import Flask, request, jsonify
-import os, json
+from to_emoji import phrase_to_emoji_scanner
+from to_text import emoji_to_text
+from initialize import symbol_map, emoji_map, phrase_to_emoji_map, pattern
 
 app = Flask(__name__)
 
-# Sets up the base directory and the json directory
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-json_path = os.path.join(BASE_DIR, 'annotations.json')
-
-# Opens the json file and reads the data
-with open(json_path, 'r', encoding = 'utf-8') as f:
-    data = json.load(f)
-
-emoji_map = data['annotations']['annotations']
-phrase_to_emoji_map = {}
-for emoji in emoji_map:
-    for emoji_phrase in emoji_map[emoji]['tts']:
-        phrase_to_emoji_map[emoji_phrase] = emoji
-
-# Common symbols, if you want to hardcode, we could add more
-symbol_map = {
-    "❗": "!",
-    "❓": "?",
-    "!" : "!",
-    "?" : "?"
-}
 
 @app.post('/convertToText')
 def convertToText():
-    """Takes in user input of emoji characters, parses them through unicode values, and returns text translation"""
     body = request.get_json()
     text = body.get("text", "")
-
-    converted = []
-    for char in text:
-        # Skip invisible emoji variation selectors
-        if char == '\ufe0f':
-            continue
-        # If the emoji is a common character, e.g "!" or "?" then replace it with the symbol
-        if char in symbol_map:
-            converted.append(symbol_map[char])
-        # Look at tts value conversion and translate
-        elif char in emoji_map:
-            desc = emoji_map[char]["tts"][0]
-            converted.append(f"{desc}")
-        # if character doesn't appear then skip
-        else:
-            converted.append(char)
-    
-    # Join into a string and return
-    cleaned = "".join(converted)
+    if text == None:
+        return {"error": 'phrase field not included in body'}, 400
+    cleaned = emoji_to_text(text, symbol_map, emoji_map)
     return jsonify({"converted_text": "".join(cleaned)})
 
 
 @app.post('/convertToEmojis')
 def convertToEmojis():
-    return
+    body = request.get_json()
+    phrase = body.get("phrase")
+    if phrase == None:
+        return {"error": 'phrase field not included in body'}, 400
+    translation = phrase_to_emoji_scanner(phrase, pattern, phrase_to_emoji_map)
+    return jsonify({"converted_emojis": translation})
+
 
 if __name__ == "__main__":
     app.run(debug=True)
