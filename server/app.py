@@ -10,7 +10,12 @@ json_path = os.path.join(BASE_DIR, 'annotations.json')
 # Opens the json file and reads the data
 with open(json_path, 'r', encoding = 'utf-8') as f:
     data = json.load(f)
+    
 emoji_map = data['annotations']['annotations']
+phrase_to_emoji_map = {}
+for emoji in emoji_map:
+    phrase_to_emoji_map[emoji_map[emoji]['tts'][0]] = emoji
+
 # Common symbols, if you want to hardcode, we could add more
 symbol_map = {
     "❗": "!",
