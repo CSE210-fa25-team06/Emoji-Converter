@@ -7,10 +7,8 @@ def phrase_to_emoji_scanner(text, pattern, phrase_to_emoji_map):
         match = pattern.match(text[i:])
         if match:
             phrase = match.group(1)
-            #ininstance check
-            if phrase in phrase_to_emoji_map:
-                result.append(phrase_to_emoji_map[phrase])
-                i += len(phrase)
+            result.append(phrase_to_emoji_map[phrase])
+            i += len(phrase)
         else:
             i += 1
     return ''.join(result)
