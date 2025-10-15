@@ -14,6 +14,9 @@
  */
 const results = { passed: 0, failed: 0 };
 
+// Only print passed test cases when the VERBOSE environment variable is set to 'true'
+const isVerbose = process.env.VERBOSE === 'true' || process.env.VERBOSE === '1';
+
 /**
  * Asserts that the `actual` value strictly equals the `expected` value.
  * Logs a PASS message if true, or a detailed FAILED message if false.
@@ -26,7 +29,9 @@ const results = { passed: 0, failed: 0 };
  */
 function assert(actual, expected, message) {
 	if (actual === expected) {
-		console.log(`PASS: ${message}`);
+		if (isVerbose) {
+			console.log(`PASS: ${actual}`);
+		}
 		results.passed++;
 	} else {
 		console.error(`FAILED TEST: ${message}`);
@@ -44,12 +49,11 @@ function assert(actual, expected, message) {
  * @param {string} testSuite.name - The name of the test suite.
  * @param {function} testSuite.run - The function containing the assertions for the suite.
  */
-function runTests(testSuite) {
+async function runTests(testSuite) {
 	console.log(`\n--- Starting suite: ${testSuite.name} ---`);
-	testSuite.run();
+	await testSuite.run();
 	console.log(`--- Finished suite: ${testSuite.name} ---\n`);
 }
-
 /**
  * Logs a summary of all executed tests (passed and failed).
  * If any tests failed, the process is terminated (exited).
@@ -59,12 +63,18 @@ function summarize() {
 	console.log(`TEST SUMMARY:`);
 	console.log("\n=================================");
 	console.log(`Passed: ${results.passed}/${numTests}`);
-	console.log(`Failed: ${results.failed}/${numTests}`);
+	if (results.passed == numTests) {
+		console.log(`All test cases passed.`);
+	} else {
+		console.log(`Failed: ${results.failed}/${numTests}`);
 	console.log("\n=================================");
+	}
 
 	if (results.failed > 0) {
 		// Exit the process with a non-zero code to signal test failure
 		process.exit(1);
+	} else {
+		console.log(`All ${numTests} tests passed successfully!`);
 	}
 }
 
