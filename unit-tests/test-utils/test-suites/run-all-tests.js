@@ -22,6 +22,7 @@ const textTests = require("./text-test.js");
 const mixedContentTests = require("./mixed-content-to-text-test.js");
 const textToEmojiTests = require("./text-to-mixed-content-test.js");
 const multiEmojiTests = require("./multi-emoji-test.js");
+
 const edgeCasesTests = require("./edge-cases-test.js");
 
 /**
@@ -30,7 +31,7 @@ const edgeCasesTests = require("./edge-cases-test.js");
  */
 const allSuites = [
 	emojiTests, 
-	textTests, 
+	textTests,
 	mixedContentTests, 
 	textToEmojiTests, 
 	multiEmojiTests,
@@ -41,12 +42,12 @@ const allSuites = [
  * Executes all test suites in the `allSuites` array and then prints a final summary.
  * This is the primary orchestration function for the testing process.
  */
-function executeAll() {
+async function executeAll() {
 	console.log("Starting automated testing process...");
 
 	// Iterate through and execute each test suite
 	for (const suite of allSuites) {
-		runTests(suite);
+		await runTests(suite);
 	}
 
 	// Print the final summary of all passed and failed tests
