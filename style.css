@@ -1,0 +1,117 @@
+:root {
+  --page-bg: #fff9c4;
+  --bg-color: #fff;
+  --accent: #f8d7dc;
+  --button-bg: #6366f1;
+  --button-hover: #4f46e5;
+  --button-text: #fff;
+  --text-color: #111;
+  --radius: 1.2rem;
+  --shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.1);
+  --font: "Segoe UI", sans-serif;
+  --gap: 1rem;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: var(--page-bg);
+  font-family: var(--font);
+  color: var(--text-color);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  background: var(--bg-color);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  width: auto;
+  padding: 2rem 3rem;
+  text-align: left;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+section {
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  display: block;
+  margin: 0;
+  padding-left: 0.5rem;
+  font-weight: 600;
+}
+
+fieldset {
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  background: var(--accent);
+  border-radius: 1.3rem;
+  padding: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+label.mode {
+  flex: 1;
+  padding: 0.6rem;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: var(--radius);
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"]:checked + label.mode {
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  box-sizing: border-box;
+}
+
+button {
+  display: block;
+  margin: 1.2rem auto 0;
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: var(--button-hover);
+}
+
+output {
+  display: block;
+  margin-top: 0.5rem;
+  background: #f7f7f7;
+  border-radius: var(--radius);
+  padding: 0.8rem;
+  font-size: 1rem;
+}

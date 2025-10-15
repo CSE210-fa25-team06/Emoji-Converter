@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emoji - Speech Translator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Emoji - Speech Translator</h1>
+
+      <section>
+        <strong class="section-title">Translate to...</strong>
+        <fieldset>
+          <input type="radio" id="emoji" name="mode" checked />
+          <label for="emoji" class="mode">Emoji</label>
+          <input type="radio" id="text" name="mode" />
+          <label for="text" class="mode">Text</label>
+        </fieldset>
+      </section>
+
+      <section>
+        <label for="emoji-input" class="section-title"
+          >Enter &lt;emoji&gt; to translate</label
+        >
+        <input id="emoji-input" type="text" placeholder="😂🐱" />
+        <button type="button">Translate</button>
+      </section>
+
+      <section>
+        <strong class="section-title">The &lt;text&gt; is...</strong>
+        <output id="output">Happy Cat</output>
+      </section>
+    </main>
+  </body>
+</html>
