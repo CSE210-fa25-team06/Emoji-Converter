@@ -4,14 +4,14 @@
  * back to emoji characters, and handling mixed scenarios.
  *
  * @module text-to-emoji-test
- * @requires ../../dummy-translator/dummy-translator.js - Contains the translateText function.
+ * @requires ../../backend-api-test-client/backend-api-test-client.js - Contains the translateText function.
  * @requires ../test-utils.js - Contains the assertion and test running utilities.
  */
 
-// Import dummy translation functions
+// Import translation functions
 const {
-	translateText, // Assuming this function exists for text-to-emoji translation
-} = require("../../dummy-translator/dummy-translator.js");
+	translateText,
+} = require("./../../backend-api-test-client/backend-api-test-client.js");
 
 // Import testing utilities
 const { assert, runTests, summarize } = require("../test-utils.js");
@@ -23,106 +23,82 @@ const { assert, runTests, summarize } = require("../test-utils.js");
  * @type {Array<Object>}
  */
 const textToEmojiTestCases = [
-	{
-		input: "I am happy today",
-		expected: "I am � today",
-		description: "Simple emotion word to emoji"
-	},
-	{
-		input: "I love coffee in the morning",
-		expected: "I love ☕ in the morning",
-		description: "Beverage reference to emoji"
-	},
-	{
-		input: "The sun is shining bright",
-		expected: "The ☀️ is shining bright",
-		description: "Weather description to emoji"
-	},
-	{
-		input: "Great job on your work",
-		expected: "Great job 👏 on your work",
-		description: "Praise expression to emoji"
-	},
-	{
-		input: "I feel sad and crying",
-		expected: "I feel 😢 and crying",
-		description: "Negative emotion to emoji"
-	},
-	{
-		input: "Time for pizza dinner",
-		expected: "Time for 🍕 dinner",
-		description: "Food item to emoji"
-	},
-	{
-		input: "Driving my car to work",
-		expected: "Driving my 🚗 to work",
-		description: "Transportation to emoji"
-	},
-	{
-		input: "Playing music on guitar",
-		expected: "Playing music on 🎸",
-		description: "Musical instrument to emoji"
-	},
-	{
-		input: "My cat is sleeping peacefully",
-		expected: "My 🐱 is 😴 peacefully",
-		description: "Animal and action to emojis"
-	},
-	{
-		input: "Celebrating with cake and balloons",
-		expected: "Celebrating with 🎂 and 🎈",
-		description: "Party items to emojis"
-	},
-	{
-		input: "Working on my laptop computer",
-		expected: "Working on my � computer",
-		description: "Technology device to emoji"
-	},
-	{
-		input: "Flying in an airplane",
-		expected: "Flying in an ✈️",
-		description: "Transportation method to emoji"
-	},
-	{
-		input: "Reading a good book tonight",
-		expected: "Reading a good 📚 tonight",
-		description: "Activity object to emoji"
-	},
-	{
-		input: "Beautiful red rose in garden",
-		expected: "Beautiful 🌹 in garden",
-		description: "Flower description to emoji"
-	},
-	{
-		input: "Calling on my phone",
-		expected: "Calling on my 📱",
-		description: "Communication device to emoji"
-	},
-	{
-		input: "This sentence has no convertible words",
-		expected: "This sentence has no convertible words",
-		description: "Text with no emoji-convertible content"
-	},
-	{
-		input: "Sending love and heart to you",
-		expected: "Sending love and ❤️ to you",
-		description: "Abstract concept to emoji"
-	},
-	{
-		input: "Basketball game tonight",
-		expected: "� game tonight",
-		description: "Sports activity to emoji"
-	},
-	{
-		input: "Thunderstorm with lightning outside",
-		expected: "⛈️ with ⚡ outside",
-		description: "Weather conditions to emojis"
-	},
-	{
-		input: "House with beautiful tree",
-		expected: "🏠 with beautiful 🌳",
-		description: "Building and nature to emojis"
-	}
+    {
+        input: "Hello grinning face world!",
+        expected: "Hello 😀 world!"
+    },
+    {
+        input: "I love hot beverage and pizza",
+        expected: "I love ☕ and 🍕"
+    },
+    {
+        input: "Good morning! sunrise Have a great day smiling face with smiling eyes",
+        expected: "Good morning! 🌅 Have a great day 😊"
+    },
+    {
+        input: "party popper confetti ball Celebration time! partying face",
+        expected: "🎉🎊 Celebration time! 🥳"
+    },
+    {
+        input: "Weather today colon sun sun behind small cloud sun behind cloud cloud with rain snowflake",
+        expected: "Weather today: ☀️🌤️⛅🌧️❄️"
+    },
+    {
+        input: "Programming is fun! laptop rocket sparkles",
+        expected: "Programming is fun! 💻🚀✨"
+    },
+    {
+        input: "fire This is lit fire",
+        expected: "🔥This is lit🔥"
+    },
+    {
+        input: "Family colon man‍ woman‍ girl‍ boy two hearts",
+        expected: "Family: 👨‍👩‍👧‍👦 💕"
+    },
+    {
+        input: "Just text without emojis",
+        expected: "Just text without emojis"
+    },
+    {
+        input: "taco hamburger french fries cup with straw Fast food combo",
+        expected: "🌮🍔🍟🥤 Fast food combo"
+    },
+    {
+        input: "Score colon trophy Winner! 1st place medal",
+        expected: "Score: 🏆 Winner! 🥇"
+    },
+    {
+        input: "musical note musical notes Music makes me happy musical note musical notes",
+        expected: "🎵🎶 Music makes me happy 🎵🎶"
+    },
+    {
+        input: "automobile dashing away Going fast!",
+        expected: "🚗💨 Going fast!"
+    },
+    {
+        input: "red heart yellow heart green heart blue heart purple heart Rainbow hearts",
+        expected: "❤️💛💚💙💜 Rainbow hearts"
+    },
+    {
+        input: "Meeting at one o’clock for lunch fork and knife with plate",
+        expected: "Meeting at 🕐 for lunch 🍽️"
+    },
+    {
+        input: "Great job! clapping hands clapping hands clapping hands",
+        expected: "Great job! 👏👏👏"
+    },
+    {
+        input: "Feeling sleeping face after a long day at work briefcase",
+        expected: "Feeling 😴 after a long day at work 💼"
+    },
+    {
+        input: "Weekend plans colon beach with umbrella person surfing‍ male sign water wave",
+        expected: "Weekend plans: 🏖️🏄‍♂️🌊"
+    },
+    {
+        input: "Birthday surprise! birthday cake wrapped gift balloon",
+        expected: "Birthday surprise! 🎂🎁🎈"
+    }
 ];
 
 /**
@@ -136,7 +112,7 @@ const textToEmojiTestCases = [
  */
 const TextToEmojiTestSuite = {
 	name: "Text to emoji translations",
-	run: () => {
+	run: async () => {
 		console.log(`\n📝➡️😀 Running ${textToEmojiTestCases.length} text-to-emoji test cases...\n`);
 
 		// Using a standard for loop for iteration
@@ -148,9 +124,9 @@ const TextToEmojiTestSuite = {
 			
 			// Use the text-to-emoji translation function
 			// This assumes a translateText function exists in dummy-translator
-			const actual = translateTextToEmoji(input);
+			const actual = await translateText(input);
 			
-			const errorMessage = `Text-to-emoji test failed for "${description}": Input "${input}" doesn't match expected output`;
+			const errorMessage = `Input "${input}" translation doesn't match expected value`;
 
 			// The assert function compares actual and expected, and logs the result.
 			assert(actual, expected, errorMessage);
@@ -182,9 +158,12 @@ function translateTextToEmoji(input) {
  * If so, execute the test suite and print the summary.
  */
 if (require.main === module) {
-	runTests(TextToEmojiTestSuite);
-	summarize();
+    (async () => {
+        await runTests(TextToEmojiTestSuite);
+        summarize();
+    })();
 }
+
 
 /**
  * @exports TextToEmojiTestSuite

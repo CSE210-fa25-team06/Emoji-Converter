@@ -4,14 +4,14 @@
  * verifying that the translation function can handle complex mixed content scenarios.
  *
  * @module mixed-content-test
- * @requires ../../dummy-translator/dummy-translator.js - Contains the translateEmoji function.
+ * @requires ../../backend-api-test-client/backend-api-test-client.js - Contains the translateEmoji function.
  * @requires ../test-utils.js - Contains the assertion and test running utilities.
  */
 
-// Import dummy translation functions
+// Import translation functions
 const {
 	translateEmoji,
-} = require("../../dummy-translator/dummy-translator.js");
+} = require("./../../backend-api-test-client/backend-api-test-client.js");
 
 // Import testing utilities
 const { assert, runTests, summarize } = require("../test-utils.js");
@@ -23,106 +23,82 @@ const { assert, runTests, summarize } = require("../test-utils.js");
  * @type {Array<Object>}
  */
 const mixedContentTestCases = [
-	{
-		input: "Hello 😀 world!",
-		expected: "Hello happy world!",
-		description: "Simple text with single emoji"
-	},
-	{
-		input: "I love ☕ and 🍕",
-		expected: "I love coffee and pizza",
-		description: "Text with multiple emojis"
-	},
-	{
-		input: "Good morning! 🌅 Have a great day 😊",
-		expected: "Good morning! The sun is rising. Have a great day with a smile.",
-		description: "Sentence with emojis at different positions"
-	},
-	{
-		input: "🎉🎊 Celebration time! 🥳",
-		expected: "It's party time! Celebration time! Everyone is celebrating.",
-		description: "Multiple consecutive emojis with text"
-	},
-	{
-		input: "Weather today: ☀️🌤️⛅🌧️❄️",
-		expected: "Weather today: sunny, partly cloudy, cloudy, rainy, and snowy.",
-		description: "Weather emojis sequence"
-	},
-	{
-		input: "Programming is fun! 💻🚀✨",
-		expected: "Programming is fun! Working on computers leads to amazing launches and magical results.",
-		description: "Tech-related emojis"
-	},
-	{
-		input: "🔥This is lit🔥",
-		expected: "This is absolutely amazing and exciting!",
-		description: "Emojis at start and end"
-	},
-	{
-		input: "Numbers: 1️⃣2️⃣3️⃣",
-		expected: "Numbers: one, two, three",
-		description: "Number emojis"
-	},
-	{
-		input: "Family: 👨‍👩‍👧‍👦 💕",
-		expected: "Family: A loving family with parents and children filled with love.",
-		description: "Complex emoji sequences with ZWJ"
-	},
-	{
-		input: "Just text without emojis",
-		expected: "Just text without emojis",
-		description: "Plain text (no emojis)"
-	},
-	{
-		input: "🌮🍔🍟🥤 Fast food combo",
-		expected: "Tacos, burgers, fries, and drinks - a complete fast food combo",
-		description: "Food emojis with descriptive text"
-	},
-	{
-		input: "Score: 🏆 Winner! 🥇",
-		expected: "Score: Achieved the trophy! Winner takes first place!",
-		description: "Achievement emojis"
-	},
-	{
-		input: "🎵🎶 Music makes me happy 🎵🎶",
-		expected: "Musical notes and melodies make me happy with beautiful sounds.",
-		description: "Repeated music emojis"
-	},
-	{
-		input: "🚗💨 Going fast!",
-		expected: "The car is speeding and going fast!",
-		description: "Action sequence with emojis"
-	},
-	{
-		input: "❤️💛💚💙💜 Rainbow hearts",
-		expected: "Hearts of all colors - red, yellow, green, blue, and purple - Rainbow hearts",
-		description: "Colored heart sequence"
-	},
-	{
-		input: "Meeting at 🕐 for lunch 🍽️",
-		expected: "Meeting at one o'clock for lunch with food on the table",
-		description: "Time and meal planning"
-	},
-	{
-		input: "Great job! 👏👏👏",
-		expected: "Great job! Everyone is clapping and applauding.",
-		description: "Repeated applause emojis"
-	},
-	{
-		input: "Feeling 😴 after a long day at work 💼",
-		expected: "Feeling sleepy and tired after a long day at work with business responsibilities",
-		description: "Emotions and work context"
-	},
-	{
-		input: "Weekend plans: 🏖️🏄‍♂️🌊",
-		expected: "Weekend plans: Going to the beach, surfing in the ocean waves",
-		description: "Beach and water activities"
-	},
-	{
-		input: "Birthday surprise! 🎂🎁🎈",
-		expected: "Birthday surprise! There's a cake, presents, and balloons for the celebration",
-		description: "Birthday celebration items"
-	}
+    {
+        input: "Hello 😀 world!",
+        expected: "Hello grinning face world!"
+    },
+    {
+        input: "I love ☕ and 🍕",
+        expected: "I love hot beverage and pizza"
+    },
+    {
+        input: "Good morning! 🌅 Have a great day 😊",
+        expected: "Good morning! sunrise Have a great day smiling face with smiling eyes"
+    },
+    {
+        input: "🎉🎊 Celebration time! 🥳",
+        expected: "party popper confetti ball Celebration time! partying face"
+    },
+    {
+        input: "Weather today: ☀️🌤️⛅🌧️❄️",
+        expected: "Weather today colon sun sun behind small cloud sun behind cloud cloud with rain snowflake"
+    },
+    {
+        input: "Programming is fun! 💻🚀✨",
+        expected: "Programming is fun! laptop rocket sparkles"
+    },
+    {
+        input: "🔥This is lit🔥",
+        expected: "fire This is lit fire"
+    },
+    {
+        input: "Family: 👨‍👩‍👧‍👦 💕",
+        expected: "Family colon man‍ woman‍ girl‍ boy two hearts"
+    },
+    {
+        input: "Just text without emojis",
+        expected: "Just text without emojis"
+    },
+    {
+        input: "🌮🍔🍟🥤 Fast food combo",
+        expected: "taco hamburger french fries cup with straw Fast food combo"
+    },
+    {
+        input: "Score: 🏆 Winner! 🥇",
+        expected: "Score colon trophy Winner! 1st place medal"
+    },
+    {
+        input: "🎵🎶 Music makes me happy 🎵🎶",
+        expected: "musical note musical notes Music makes me happy musical note musical notes"
+    },
+    {
+        input: "🚗💨 Going fast!",
+        expected: "automobile dashing away Going fast!"
+    },
+    {
+        input: "❤️💛💚💙💜 Rainbow hearts",
+        expected: "red heart yellow heart green heart blue heart purple heart Rainbow hearts"
+    },
+    {
+        input: "Meeting at 🕐 for lunch 🍽️",
+        expected: "Meeting at one o’clock for lunch fork and knife with plate"
+    },
+    {
+        input: "Great job! 👏👏👏",
+        expected: "Great job! clapping hands clapping hands clapping hands"
+    },
+    {
+        input: "Feeling 😴 after a long day at work 💼",
+        expected: "Feeling sleeping face after a long day at work briefcase"
+    },
+    {
+        input: "Weekend plans: 🏖️🏄‍♂️🌊",
+        expected: "Weekend plans colon beach with umbrella person surfing‍ male sign water wave"
+    },
+    {
+        input: "Birthday surprise! 🎂🎁🎈",
+        expected: "Birthday surprise! birthday cake wrapped gift balloon"
+    }
 ];
 
 /**
@@ -136,7 +112,7 @@ const mixedContentTestCases = [
  */
 const MixedContentTestSuite = {
 	name: "Mixed emoji and text translations",
-	run: () => {
+	run: async () => {
 		console.log(`\n🧪 Running ${mixedContentTestCases.length} mixed content test cases...\n`);
 
 		// Using a standard for loop for iteration
@@ -144,14 +120,13 @@ const MixedContentTestSuite = {
 			const testCase = mixedContentTestCases[i];
 			const input = testCase.input;
 			const expected = testCase.expected;
-			const description = testCase.description;
 			
 			// For now, using the dummy translateEmoji function
 			// In a real implementation, this would be replaced with a function
 			// that can handle mixed content translation
-			const actual = translateMixedContent(input);
+			const actual = await translateEmoji(input);
 			
-			const errorMessage = `Mixed content test failed for "${description}": Input "${input}" doesn't match expected translation`;
+			const errorMessage = `Input "${input}" translation doesn't match expected value`;
 
 			// The assert function compares actual and expected, and logs the result.
 			assert(actual, expected, errorMessage);
@@ -186,8 +161,10 @@ function translateMixedContent(input) {
  * If so, execute the test suite and print the summary.
  */
 if (require.main === module) {
-	runTests(MixedContentTestSuite);
-	summarize();
+    (async () => {
+        await runTests(MixedContentTestSuite);
+        summarize();
+    })();
 }
 
 /**

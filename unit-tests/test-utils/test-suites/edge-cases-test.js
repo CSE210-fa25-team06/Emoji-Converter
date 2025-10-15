@@ -14,14 +14,14 @@
  * boundary scenarios that the translation functions should handle gracefully.
  *
  * @module edge-cases-test
- * @requires ../../dummy-translator/dummy-translator.js - Contains translation functions.
+ * @requires ../../backend-api-test-client/backend-api-test-client.js - Contains translation functions.
  * @requires ../test-utils.js - Contains the assertion and test running utilities.
  */
 
-// Import dummy translation functions
+// Import translation functions
 const {
 	translateEmoji,
-} = require("./../../dummy-translator/dummy-translator.js");
+} = require("./../../backend-api-test-client/backend-api-test-client.js");
 
 // Import testing utilities
 const { assert, runTests, summarize } = require("./../test-utils.js");
@@ -143,7 +143,7 @@ const edgeCaseTestCases = [
  */
 const EdgeCasesTestSuite = {
 	name: "True edge cases and boundary conditions",
-	run: () => {
+	run: async () => {
 		console.log(`\n⚠️🔍 Running ${edgeCaseTestCases.length} true edge case test scenarios...\n`);
 
 		// Using a standard for loop for iteration
@@ -155,9 +155,9 @@ const EdgeCasesTestSuite = {
 			
 			try {
 				// Test the translation function with edge case input
-				const actual = translateEmojiSafely(input);
+				const actual = await translateEmoji(input);
 				
-				const errorMessage = `Edge case test failed for "${description}": Input "${input}" doesn't match expected behavior`;
+				const errorMessage = `Input "${input}" translation doesn't match expected value`;
 
 				// The assert function compares actual and expected, and logs the result.
 				assert(actual, expected, errorMessage);
@@ -215,8 +215,10 @@ function translateEmojiSafely(input) {
  * If so, execute the test suite and print the summary.
  */
 if (require.main === module) {
-	runTests(EdgeCasesTestSuite);
-	summarize();
+    (async () => {
+        await runTests(EdgeCasesTestSuite);
+        summarize();
+    })();
 }
 
 /**
