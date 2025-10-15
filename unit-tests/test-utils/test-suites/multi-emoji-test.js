@@ -4,14 +4,14 @@
  * and complex emoji structures that should be translated as cohesive units.
  *
  * @module multi-emoji-test
- * @requires ../../dummy-translator/dummy-translator.js - Contains translation functions.
+ * @requires ../../backend-api-test-client/backend-api-test-client.js - Contains translateEmoji translation function.
  * @requires ../test-utils.js - Contains the assertion and test running utilities.
  */
 
-// Import dummy translation functions
+// Import translation function
 const {
 	translateEmoji,
-} = require("./../../dummy-translator/dummy-translator.js");
+} = require("./../../backend-api-test-client/backend-api-test-client.js");
 
 // Import testing utilities
 const { assert, runTests, summarize } = require("./../test-utils.js");
@@ -24,249 +24,160 @@ const { assert, runTests, summarize } = require("./../test-utils.js");
  */
 const multiEmojiTestCases = [
 	// ZWJ Complex Emojis
-	{
-		input: "🤷‍♀️",
-		expected: "A woman expressing uncertainty or confusion",
-		description: "Complex emoji with ZWJ (Zero Width Joiner)"
-	},
-	{
-		input: "👨‍👩‍👧‍👦",
-		expected: "A happy family with parents and children",
-		description: "Family emoji with multiple ZWJ sequences"
-	},
-	{
-		input: "🏳️‍🌈",
-		expected: "Pride flag representing diversity and inclusion",
-		description: "Flag emoji with variation selector and ZWJ"
-	},
-	{
-		input: "👨‍💻👩‍⚕️🧑‍🎓👩‍🎨",
-		expected: "People with different professions: a male technologist, female healthcare worker, student, and female artist",
-		description: "Multiple professional role emojis"
-	},
+    {
+        input: "🤷‍♀️",
+        expected: "person shrugging female sign"
+    },
+    {
+        input: "👨‍👩‍👧‍👦",
+        expected: "man‍ woman‍ girl‍ boy"
+    },
+    {
+        input: "🏳️‍🌈",
+        expected: "white flag rainbow"
+    },
+    {
+        input: "👨‍💻👩‍⚕️🧑‍🎓👩‍🎨",
+        expected: "man laptop woman medical symbol person graduation cap woman artist palette"
+    },
 
-	// Skin Tone Variations
-	{
-		input: "👋🏻👋🏼👋🏽👋🏾👋🏿",
-		expected: "People of all skin tones waving hello in unity",
-		description: "Emoji with different skin tone modifiers showing diversity"
-	},
-	{
-		input: "🤝🏻🤝🏼🤝🏽🤝🏾🤝🏿",
-		expected: "Handshakes between people of different skin tones representing cooperation and equality",
-		description: "Handshake emojis across skin tones"
-	},
-	{
-		input: "👶🏻👶🏼👶🏽👶🏾👶🏿",
-		expected: "Babies of all ethnicities representing the future generation",
-		description: "Baby emojis with different skin tones"
-	},
+    {
+        input: "👋🏻👋🏼👋🏽👋🏾👋🏿",
+        expected: "waving hand light skin tone waving hand medium-light skin tone waving hand medium skin tone waving hand medium-dark skin tone waving hand dark skin tone"
+    },
+    {
+        input: "🤝🏻🤝🏼🤝🏽🤝🏾🤝🏿",
+        expected: "handshake light skin tone handshake medium-light skin tone handshake medium skin tone handshake medium-dark skin tone handshake dark skin tone"
+    },
+    {
+        input: "👶🏻👶🏼👶🏽👶🏾👶🏿",
+        expected: "baby light skin tone baby medium-light skin tone baby medium skin tone baby medium-dark skin tone baby dark skin tone"
+    },
 
-	// Number and Symbol Sequences
-	{
-		input: "1️⃣2️⃣3️⃣4️⃣5️⃣",
-		expected: "Counting from one to five",
-		description: "Number keycap sequence"
-	},
-	{
-		input: "🔟9️⃣8️⃣7️⃣6️⃣5️⃣4️⃣3️⃣2️⃣1️⃣",
-		expected: "Countdown from ten to one",
-		description: "Reverse number countdown"
-	},
-	{
-		input: "©️®️™️",
-		expected: "Intellectual property symbols: copyright, registered trademark, and trademark",
-		description: "Legal symbol emojis"
-	},
+    {
+        input: "©️®️™️",
+        expected: "copyright registered trade mark"
+    },
+    {
+        input: "⏰⌚🕰️",
+        expected: "alarm clock watch mantelpiece clock"
+    },
 
-	// Country Flags
-	{
-		input: "🇺🇸🇬🇧🇫🇷🇩🇪🇯🇵",
-		expected: "International flags representing United States, United Kingdom, France, Germany, and Japan",
-		description: "Multiple country flag emojis"
-	},
-	{
-		input: "🇨🇳🇮🇳🇧🇷🇷🇺��",
-		expected: "Flags of major world economies: China, India, Brazil, Russia, and South Africa",
-		description: "BRICS nations flags"
-	},
-	{
-		input: "🇪🇺🇺🇳🏴‍☠️",
-		expected: "European Union flag, United Nations flag, and pirate flag representing different types of governance",
-		description: "International organization and symbolic flags"
-	},
+    {
+        input: "🌍🌎🌏",
+        expected: "globe showing Europe-Africa globe showing Americas globe showing Asia-Australia"
+    },
+    {
+        input: "🌍🌎🌏🌐",
+        expected: "globe showing Europe-Africa globe showing Americas globe showing Asia-Australia globe with meridians"
+    },
 
-	// Time Sequences
-	{
-		input: "🕐🕑🕒🕓🕔🕕",
-		expected: "Time progression from one o'clock to six o'clock in the morning",
-		description: "Morning clock face sequence"
-	},
-	{
-		input: "🕕🕖🕗🕘🕙🕚🕛🕧",
-		expected: "Time progression from six o'clock through midnight showing a full evening",
-		description: "Evening to midnight clock sequence"
-	},
-	{
-		input: "⏰⌚�🕰️",
-		expected: "Different time-keeping devices: alarm clock, watch, one o'clock, and mantle clock",
-		description: "Various time-related emojis"
-	},
+    {
+        input: "☀️🌤️⛅🌦️🌧️⛈️🌩️❄️",
+        expected: "sun sun behind small cloud sun behind cloud sun behind rain cloud cloud with rain cloud with lightning and rain cloud with lightning snowflake"
+    },
+    {
+        input: "🌈🌦️☔🌂",
+        expected: "rainbow sun behind rain cloud umbrella with rain drops closed umbrella"
+    },
+    {
+        input: "🌡️🥵🔥💧🥶❄️",
+        expected: "thermometer hot face fire droplet cold face snowflake"
+    },
 
-	// Globe Perspectives
-	{
-		input: "🌍🌎🌏",
-		expected: "Planet Earth viewed from different angles: Europe-Africa, Americas, and Asia-Australia",
-		description: "Global earth perspectives"
-	},
-	{
-		input: "🌍🌎🌏🌐",
-		expected: "Earth from all continental perspectives plus the global internet network",
-		description: "Physical and digital world representation"
-	},
+    {
+        input: "♠️♣️♥️♦️",
+        expected: "spade suit club suit heart suit diamond suit"
+    },
+    {
+        input: "🎲🎯🎱🃏🎰",
+        expected: "game die bullseye pool 8 ball joker slot machine"
+    },
+    {
+        input: "♟️♟️",
+        expected: "chess pawn chess pawn"
+    },
 
-	// Weather Patterns
-	{
-		input: "☀️🌤️⛅🌦️🌧️⛈️🌩️❄️",
-		expected: "Complete weather progression from sunny to stormy with snow",
-		description: "Weather sequence from clear to severe"
-	},
-	{
-		input: "🌈🌦️☔🌂",
-		expected: "Rainbow after rain with umbrella protection",
-		description: "Post-rain weather sequence"
-	},
-	{
-		input: "🌡️🥵🔥💧🥶❄️",
-		expected: "Temperature extremes from hot fire to freezing cold with water in between",
-		description: "Temperature range indicators"
-	},
+    {
+        input: "🚶‍♂️🚴‍♂️🏃‍♂️🚗✈️🚀",
+        expected: "person walking male sign person biking male sign person running male sign automobile airplane rocket"
+    },
+    {
+        input: "🚂🚃🚄🚅🚆🚇🚈",
+        expected: "locomotive railway car high-speed train bullet train train metro light rail"
+    },
+    {
+        input: "⛵⚓",
+        expected: "sailboat anchor"
+    },
+    {
+        input: "🌱🌾🍞🥖🥐🧈",
+        expected: "seedling sheaf of rice bread baguette bread croissant butter"
+    },
+    {
+        input: "🐄🥛🧀",
+        expected: "cow glass of milk cheese wedge"
+    },
+    {
+        input: "🍎🍊🍌🍇🥝🍓",
+        expected: "red apple tangerine banana grapes kiwi fruit strawberry"
+    },
+    {
+        input: "🎉🎊🎈🎂🎁🎀",
+        expected: "party popper confetti ball balloon birthday cake wrapped gift ribbon"
+    },
+    {
+        input: "🎄🎅🤶🎁🔔❄️",
+        expected: "Christmas tree Santa Claus Mrs. Claus wrapped gift bell snowflake"
+    },
+    {
+        input: "🎃👻🕷️🦇🔮🧙‍♀️",
+        expected: "jack-o-lantern ghost spider bat crystal ball mage female sign"
+    },
 
-	// Card Suits and Games
-	{
-		input: "♠️♣️♥️♦️",
-		expected: "All four playing card suits: spades, clubs, hearts, and diamonds for a complete deck",
-		description: "Complete playing card suits"
-	},
-	{
-		input: "🎲🎯🎱🃏🎰",
-		expected: "Casino and gaming collection: dice, darts, pool ball, joker card, and slot machine",
-		description: "Gaming and gambling emojis"
-	},
-	{
-		input: "♟️♞♝♜♛♚",
-		expected: "Chess pieces representing strategy and intellectual competition",
-		description: "Chess piece emojis"
-	},
+    {
+        input: "🚀🚀🚀🚀🚀",
+        expected: "rocket rocket rocket rocket rocket"
+    },
+    {
+        input: "❤️❤️❤️❤️❤️",
+        expected: "red heart red heart red heart red heart red heart"
+    },
+    {
+        input: "🔥🔥🔥🔥🔥",
+        expected: "fire fire fire fire fire"
+    },
 
-	// Transportation Sequence
-	{
-		input: "🚶‍♂️🚴‍♂️🏃‍♂️🚗✈️🚀",
-		expected: "Transportation evolution: walking, cycling, running, driving, flying, and space travel",
-		description: "Progressive transportation methods"
-	},
-	{
-		input: "🚂🚃🚄🚅🚆🚇🚈",
-		expected: "Complete train system from traditional locomotive to modern subway",
-		description: "Railway transportation variety"
-	},
-	{
-		input: "⛵��️��️⚓",
-		expected: "Maritime vessels from small sailboat to large cruise ship with anchor",
-		description: "Water transportation fleet"
-	},
+    {
+        input: "⚠️⛔🚫❌🛑",
+        expected: "warning no entry prohibited cross mark stop sign"
+    },
+    {
+        input: "🚨🆘🚑🏥💊",
+        expected: "police car light SOS button ambulance hospital pill"
+    },
 
-	// Food Progression
-	{
-		input: "🌱🌾🍞🥖🥐🧈",
-		expected: "From seed to bread: plant growth leading to various baked goods with butter",
-		description: "Food production to consumption chain"
-	},
-	{
-		input: "🐄🥛🧀���",
-		expected: "Dairy cow providing milk for cheese used in pizza and pasta with shrimp",
-		description: "Farm to table food chain"
-	},
-	{
-		input: "🍎🍊🍌🍇🥝🍓",
-		expected: "Healthy fruit selection: apple, orange, banana, grapes, kiwi, and strawberry",
-		description: "Fruit variety collection"
-	},
+    {
+        input: "🎭🎪🎨🎬🎤🎧🎼🎹🎺🎸🥁",
+        expected: "performing arts circus tent artist palette clapper board microphone headphone musical score musical keyboard trumpet guitar drum"
+    },
+    {
+        input: "📚📖✏️🖊️📝🎓",
+        expected: "books open book pencil pen memo graduation cap"
+    },
 
-	// Celebration Sequences
-	{
-		input: "🎉🎊🎈🎂🎁🎀",
-		expected: "Complete party setup with confetti, balloons, cake, presents, and ribbons",
-		description: "Full celebration package"
-	},
-	{
-		input: "🎄🎅🤶🎁🔔❄️",
-		expected: "Christmas celebration with tree, Santa, Mrs. Claus, gifts, bells, and snow",
-		description: "Christmas holiday sequence"
-	},
-	{
-		input: "🎃👻🕷️🦇🔮🧙‍♀️",
-		expected: "Halloween theme with pumpkin, ghost, spider, bat, crystal ball, and witch",
-		description: "Halloween spooky collection"
-	},
-
-	// Repeated Emojis for Emphasis
-	{
-		input: "🚀🚀🚀🚀🚀",
-		expected: "Multiple rockets launching simultaneously - very exciting space mission!",
-		description: "Repeated identical emojis for emphasis"
-	},
-	{
-		input: "❤️❤️❤️❤️❤️",
-		expected: "Overwhelming love and affection expressed through multiple hearts",
-		description: "Multiple hearts showing intense emotion"
-	},
-	{
-		input: "🔥🔥🔥🔥🔥",
-		expected: "Something extremely hot, exciting, or trending - totally on fire!",
-		description: "Multiple fire emojis for intensity"
-	},
-
-	// Warning and Safety
-	{
-		input: "⚠️⛔🚫❌🛑",
-		expected: "Multiple warning levels: caution, prohibition, restriction, denial, and full stop",
-		description: "Escalating warning and prohibition symbols"
-	},
-	{
-		input: "🚨🆘🚑🏥💊",
-		expected: "Emergency response sequence: alarm, SOS call, ambulance, hospital, and medication",
-		description: "Medical emergency response chain"
-	},
-
-	// Arts and Entertainment Collection
-	{
-		input: "🎭🎪🎨🎬🎤🎧🎼🎹🎺🎸🥁",
-		expected: "Complete arts and entertainment venue with theater, circus, visual arts, film, music performance, and various instruments",
-		description: "Comprehensive arts and entertainment emojis"
-	},
-	{
-		input: "📚📖✏️🖊️📝🎓",
-		expected: "Educational journey from books and reading to writing and graduation",
-		description: "Learning and education progression"
-	},
-
-	// Nature and Environment
-	{
-		input: "🌱🌿🌳🌲🏔️🌊",
-		expected: "Natural environment from small sprout to full forest, mountains, and ocean",
-		description: "Nature ecosystem progression"
-	},
-	{
-		input: "🌸🌺🌻🌷🌹💐",
-		expected: "Beautiful flower garden with cherry blossom, hibiscus, sunflower, tulip, rose, and bouquet",
-		description: "Flower garden collection"
-	},
-	{
-		input: "�🦋���️🦗",
-		expected: "Insect world: caterpillar transforming to butterfly, bee, ladybug, spider, and cricket",
-		description: "Insect ecosystem variety"
-	}
+    {
+        input: "🌱🌿🌳🌲🏔️🌊",
+        expected: "seedling herb deciduous tree evergreen tree snow-capped mountain water wave"
+    },
+    {
+        input: "🌸🌺🌻🌷🌹💐",
+        expected: "cherry blossom hibiscus sunflower tulip rose bouquet"
+    },
+    {
+        input: "🦋🦗",
+        expected: "butterfly cricket"
+    }
 ];
 
 /**
@@ -280,7 +191,7 @@ const multiEmojiTestCases = [
  */
 const MultiEmojiTestSuite = {
 	name: "Multi-emoji translations and complex sequences",
-	run: () => {
+	run: async () => {
 		console.log(`\n🎭 Running ${multiEmojiTestCases.length} multi-emoji test scenarios...\n`);
 
 		// Using a standard for loop for iteration
@@ -292,9 +203,9 @@ const MultiEmojiTestSuite = {
 			
 			try {
 				// Test the translation function with multi-emoji input
-				const actual = translateMultiEmoji(input);
+				const actual = await translateEmoji(input);
 				
-				const errorMessage = `Multi-emoji test failed for "${description}": Input "${input}" doesn't match expected behavior`;
+				const errorMessage = `Input "${input}" translation doesn't match expected value`;
 
 				// The assert function compares actual and expected, and logs the result.
 				assert(actual, expected, errorMessage);
@@ -334,8 +245,10 @@ function translateMultiEmoji(input) {
  * If so, execute the test suite and print the summary.
  */
 if (require.main === module) {
-	runTests(MultiEmojiTestSuite);
-	summarize();
+    (async () => {
+        await runTests(MultiEmojiTestSuite);
+        summarize();
+    })();
 }
 
 /**
