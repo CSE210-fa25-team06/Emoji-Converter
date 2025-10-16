@@ -32,5 +32,5 @@ function updateMode() {
 }
 
 //add listeners to radio elements
-emojiRadio.addEventListener("change", updateMode)
-textRadio.addEventListener("change", updateMode)
+emojiRadio.addEventListener("change", updateMode);
+textRadio.addEventListener("change", updateMode);
