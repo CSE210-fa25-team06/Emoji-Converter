@@ -2,65 +2,86 @@
   --page-bg: #fff9c4;
   --bg-color: #fff;
   --accent: #f8d7dc;
+  --accent-border: #f0a9b5;
   --button-bg: #6366f1;
   --button-hover: #4f46e5;
   --button-text: #fff;
-  --text-color: #111;
+  --text-color: #222;
   --radius: 1.2rem;
-  --shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.1);
+  --shadow-soft: 0 30px 50px -20px rgba(0, 0, 0, 0.3),
+    -25px 0 40px -25px rgba(0, 0, 0, 0.25);
+  --shadow-focus: 0 0 6px rgba(88, 88, 88, 0.4);
   --font: "Segoe UI", sans-serif;
-  --gap: 1rem;
 }
 
+/* Reset + layout */
 html,
 body {
   height: 100%;
   margin: 0;
-  background-color: var(--page-bg);
   font-family: var(--font);
   color: var(--text-color);
+  background: url("assets/img.png") no-repeat center -90px fixed;
+  background-size: cover;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* Main card */
 main {
   background: var(--bg-color);
-  box-shadow: var(--shadow);
   border-radius: var(--radius);
-  width: auto;
+  width: 38rem;
+  max-width: 90%;
   padding: 2rem 3rem;
+  margin-top: 4rem;
   text-align: left;
+  box-shadow: var(--shadow-soft);
+  opacity: 0.95;
 }
 
+/* Title */
 h1 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
   text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
 }
 
+/* Section layout */
 section {
   margin-bottom: 1.5rem;
 }
 
 .section-title {
   display: block;
-  margin: 0;
-  padding-left: 0.5rem;
+  margin: 0 0 0.5rem 0.5rem;
   font-weight: 600;
+  font-size: 1rem;
 }
 
+/* Fieldset styling */
 fieldset {
-  border: none;
+  border: 1px solid var(--accent-border);
   display: flex;
   justify-content: space-between;
   background: var(--accent);
   border-radius: 1.3rem;
-  padding: 0.3rem;
+  padding: 0.4rem 0.8rem;
   margin-top: 0.5rem;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+/* Radio buttons */
 label.mode {
   flex: 1;
   padding: 0.6rem;
@@ -68,6 +89,8 @@ label.mode {
   cursor: pointer;
   font-weight: 500;
   border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
 }
 
 input[type="radio"] {
@@ -76,9 +99,11 @@ input[type="radio"] {
 
 input[type="radio"]:checked + label.mode {
   background: #fff;
-  box-shadow: var(--shadow);
+  border-color: #e8bfbf;
+  box-shadow: var(--shadow-focus);
 }
 
+/* Text input */
 input[type="text"] {
   width: 100%;
   padding: 0.8rem;
@@ -87,8 +112,15 @@ input[type="text"] {
   font-size: 1rem;
   margin-top: 0.5rem;
   box-sizing: border-box;
+  transition: box-shadow 0.2s ease;
 }
 
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+/* Button */
 button {
   display: block;
   margin: 1.2rem auto 0;
@@ -99,14 +131,16 @@ button {
   padding: 0.8rem 2rem;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: var(--shadow);
-  transition: background 0.2s ease;
+  box-shadow: var(--shadow-focus);
+  transition: background 0.2s ease, transform 0.1s ease;
 }
 
 button:hover {
   background: var(--button-hover);
+  transform: translateY(-1px);
 }
 
+/* Output box */
 output {
   display: block;
   margin-top: 0.5rem;
@@ -114,4 +148,5 @@ output {
   border-radius: var(--radius);
   padding: 0.8rem;
   font-size: 1rem;
+  border: 1px solid #e5e5e5;
 }

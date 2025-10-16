@@ -15,16 +15,16 @@ is made - this will probably be done in the function making the API call
 function updateMode() {
     if (emojiRadio.checked) { //translating from emoji
         //update labels
-        inputLabel.innerHTML = "Enter &lt;emoji&gt; to translate";
-        outputLabel.innerHTML = "The &lt;text&gt; is...";
+        inputLabel.innerHTML = "Enter emoji to translate";
+        outputLabel.innerHTML = "The text is...";
         //swap placeholders
         inputField.placeholder = "😂🐱";
         outputField.innerHTML = "Happy Cat";
     }
     else { //translating from text
         //update labels
-        inputLabel.innerHTML = "Enter &lt;text&gt; to translate";
-        outputLabel.innerHTML = "The &lt;emojis&gt; are..."; //plural? mayyybe add logic to use correct grammar
+        inputLabel.innerHTML = "Enter text to translate";
+        outputLabel.innerHTML = "The emojis are..."; //plural? mayyybe add logic to use correct grammar
         //swap placeholders
         inputField.placeholder = "Happy Cat";
         outputField.innerHTML = "😂🐱";

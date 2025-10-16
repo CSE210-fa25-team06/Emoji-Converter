@@ -8,11 +8,10 @@
   </head>
   <body>
     <main>
-      <h1>Emoji - Speech Translator</h1>
-
       <section>
         <strong class="section-title">Translate from...</strong>
         <fieldset>
+          <legend class="sr-only">Translation mode</legend>
           <input type="radio" id="emoji" name="mode" checked />
           <label for="emoji" class="mode">Emoji</label>
           <input type="radio" id="text" name="mode" />
@@ -21,18 +20,21 @@
       </section>
 
       <section>
-        <label for="translation-input" class="section-title"
-          >Enter &lt;emoji&gt; to translate</label
-        >
+        <label for="translation-input" class="section-title">
+          Enter emoji to translate
+        </label>
         <input id="translation-input" type="text" placeholder="😂🐱" />
         <button id="translate-button" type="button">Translate</button>
       </section>
 
       <section>
-        <strong id="output-label" class="section-title">The &lt;text&gt; is...</strong>
+        <strong id="output-label" class="section-title">
+          The text is...
+        </strong>
         <output id="translation-output">Happy Cat</output>
       </section>
     </main>
+
     <script src="script/update_mode.js"></script>
     <script src="script/call_translation.js"></script>
   </body>
