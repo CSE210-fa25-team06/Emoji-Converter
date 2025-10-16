@@ -18,6 +18,10 @@ This repository contains the automated test suite for the emoji to text translat
 | **`test-utils/test-suites/run-all-tests.js`** | The main executable script that imports and runs all individual test suites. |
 | **`test-utils/test-suites/emoji-test.js`** | Test suite for the **emoji to text** translation function. |
 | **`test-utils/test-suites/text-test.js`** | Test suite for the **text to emoji** translation function. |
+| **`test-utils/test-suites/multi-emoji-test.js`** | Test suite for multi-emoji translation. |
+| **`test-utils/test-suites/mixed-content-to-text-test.js`** | Test suite for translating mixed content (containing both emoji and text) to text |
+| **`test-utils/test-suites/text-to-mixed-content-test.js`** | Test suite for translating text to mixed content |
+| **`test-utils/test-suites/edge-cases-test.js`** | Test suite for edge cases including null value, empty string, and invalid emoji inputs|
 | **`test-utils/emoji-dataset/emoji_tts.json`** | The emoji to text dataset. |
 
 ## Running the Test Suite
@@ -31,6 +35,7 @@ Download the following tools to run the **`update_emojis.sh`** script:
 * **`curl`**: For downloading the source data.
 * **`jq`**: For processing and filtering JSON data.
 * **`csvjson`**: For converting the data into the final JSON format.
+* **`node-fetch`**: For making HTTP requests.
 
 ### 2. Update the emoji dataset
 
@@ -43,8 +48,18 @@ sh emoji-dataset/update_emojis.sh
 
 Run these commands from the **`unit-tests`** directory to run the test suites.
 
+The flask server must be running for the following commands to work. Check the README.md file in the /server folder of the root directory for more information. 
+
 ```
 npm run run-all-tests	Runs all test suites.
-npm run run-emoji-tests	Runs the emoji to text translation test suite.
-npm run run-text-tests	Runs the text to emoji translation test suite.
+npm run run-emoji-tests	Runs the test suite that attempts to translate a single emoji into text.
+npm run run-text-tests	Runs the test suite that attempts to translate any text that could be an emoji into an emoji.
+
+npm run run-edge-case-tests	Runs a test suite consisting of strange inputs.
+npm run run-mixed-content-to-text-tests	Runs the test suite that attempts to translate mixed content (i.e., text and emojis) into all text.
+npm run run-text-to-mixed-content-tests Runs the test suite that attempts to translate any text that appears in mixed content (i.e., text and emojis) that could be an emoji into an emoji.
+
+npm run run-multi-emoji-tests Runs the test suite that attempts to translate multiple emojis into text.
 ```
+
+By default, tests cases that pass are not printed to the console. Append -verbose to the end of each command to print passed tests (e.g., ```npm run run-all-tests-verbose```).

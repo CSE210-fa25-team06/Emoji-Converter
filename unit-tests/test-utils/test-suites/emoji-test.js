@@ -4,15 +4,15 @@
  * and verifies that the `translateEmoji` function produces the correct output for each emoji.
  *
  * @module emoji-test
- * @requires ../../dummy-translator/dummy-translator.js - Contains the translateEmoji function.
+ * @requires ../../backend-api-test-client/backend-api-test-client.js - Contains the translateEmoji function.
  * @requires ../test-utils.js - Contains the assertion and test running utilities.
  * @requires ../../json-parsing/parse-json.js - Utility to read and parse JSON files.
  */
 
-// Import dummy translation functions
+// Import translation functions
 const {
 	translateEmoji,
-} = require("./../../dummy-translator/dummy-translator.js");
+} = require("./../../backend-api-test-client/backend-api-test-client.js");
 
 // Import testing utilities
 const { assert, runTests, summarize } = require("./../test-utils.js");
@@ -42,7 +42,7 @@ if (!emojis) {
  */
 const EmojiTranslationTestSuite = {
 	name: "Single emoji to text translations",
-	run: () => {
+	run: async () => {
 		if (!emojis) {
 			// The error is already logged above, just prevent the loop from running.
 			return;
@@ -51,7 +51,7 @@ const EmojiTranslationTestSuite = {
 		// Using a standard for loop for iteration
 		for (i = 0; i < emojis.length; i++) {
 			const input = emojis[i].emoji;
-			const actual = translateEmoji(input);
+			const actual = await translateEmoji(input)
 			const expected = emojis[i].translation;
 			const errorMessage = `Emoji '${input}' translation doesn't match expected value`;
 
@@ -66,8 +66,10 @@ const EmojiTranslationTestSuite = {
  * If so, execute the test suite and print the summary.
  */
 if (require.main === module) {
-	runTests(EmojiTranslationTestSuite);
-	summarize();
+    (async () => {
+        await runTests(EmojiTranslationTestSuite);
+        summarize();
+    })();
 }
 
 /**
