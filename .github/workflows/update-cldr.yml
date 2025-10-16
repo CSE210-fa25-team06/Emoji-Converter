@@ -1,0 +1,48 @@
+name: Update CLDR Emoji Data
+
+on:
+  workflow_dispatch:
+
+  # Run at 03:00 UTC every Sunday.
+  schedule:
+    - cron: '0 3 * * 0'
+
+jobs:
+  fetch-cldr-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Ensure data directory exists
+        run: mkdir -p data
+
+      - name: Download latest CLDR emoji annotations file
+        run: >
+          curl
+          --fail
+          -L
+          -o data/annotations.json
+          https://raw.githubusercontent.com/unicode-org/cldr-json/main/cldr-json/cldr-annotations-full/annotations/en/annotations.json
+
+      - name: Validate and commit if content has changed
+        run: |
+          # If it's empty, we print an error and exit with a failure code.
+          if ! [ -s "data/annotations.json" ]; then
+            echo "Error: Downloaded CLDR file is empty. Aborting workflow."
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add data/annotations.json
+          
+          if git diff --staged --quiet; then
+            echo "No changes to the CLDR file. Nothing to commit."
+          else
+            git commit -m "chore: Update CLDR emoji data"
+            git push
+            echo "CLDR file updated and pushed to the repository."
+          fi
