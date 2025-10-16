@@ -1,3 +1,10 @@
 {
-  "extends": "stylelint-config-standard"
+  "extends": "stylelint-config-standard",
+  "ignoreFiles": [
+    "node_modules/**",
+    "emoji/Lib/**",
+    "**/debug/**",
+    "server/static/test_utils/**",
+    "**/__pycache__/**"
+  ]
 }

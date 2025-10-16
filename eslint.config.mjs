@@ -3,6 +3,11 @@ import js from "@eslint/js";
 export default [
   js.configs.recommended,
   {
+    ignores: [
+      "server/static/test_utils/**",
+      "node_modules/**",
+      "tests/**"
+    ],
     languageOptions: {
       globals: {
         document: "readonly",
