@@ -2,8 +2,10 @@ from flask import Flask, request, jsonify
 from to_emoji import phrase_to_emoji_scanner
 from to_text import emoji_to_text
 from initialize import symbol_map, emoji_map, phrase_to_emoji_map, pattern
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.post('/convertToText')
