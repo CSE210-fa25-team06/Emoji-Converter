@@ -4,9 +4,12 @@ export default [
   js.configs.recommended,
   {
     ignores: [
-      "server/static/test_utils/**",
       "node_modules/**",
-      "tests/**"
+      "emoji/Lib/**",
+      "unit-tests/**",
+      "server/static/test_utils/**",
+      "**/__pycache__/**",
+      "**/debug/**"
     ],
     languageOptions: {
       globals: {
