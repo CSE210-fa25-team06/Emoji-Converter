@@ -16,4 +16,4 @@ def emoji_to_text(text, symbol_map, emoji_map):
             converted.append(char)
     
     # Join into a string and return
-    return "".join(converted)
+    return " ".join(converted)
