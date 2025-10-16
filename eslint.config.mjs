@@ -1,21 +1,27 @@
 import js from "@eslint/js";
 
 export default [
-  js.configs.recommended,
+
   {
     ignores: [
-      "node_modules/**",
-      "emoji/Lib/**",
+      "emoji/**",
       "unit-tests/**",
-      "server/static/test_utils/**",
+      "node_modules/**",
       "**/__pycache__/**",
       "**/debug/**"
     ],
+  },
+  js.configs.recommended,
+  {
+    files: ["server/**/*.js", "server/**/*.mjs", "server/**/*.cjs"],
     languageOptions: {
       globals: {
         document: "readonly",
         window: "readonly",
         fetch: "readonly",
+        console: "readonly",
+        setTimeout: "readonly",
+        requestAnimationFrame: "readonly"
       },
       sourceType: "module",
       ecmaVersion: "latest",
@@ -24,7 +30,7 @@ export default [
       semi: ["error", "always"],
       quotes: ["error", "double"],
       "no-unused-vars": "warn",
-      "no-console": "off",
+      "no-console": "off"
     },
   },
 ];
