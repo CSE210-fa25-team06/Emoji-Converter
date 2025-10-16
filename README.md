@@ -40,3 +40,29 @@ Emoji-Converter for Team06 @ CSE210 Fall 2025.
 ### **Project Coordination**
 **Description:** Leads meetings, tracks progress, and ensures timely delivery of all tasks.  
 **Members:** Melvyn, Isheta  
+
+## **Setup Instructions**
+
+1. Activate the virtual environment:
+   ```bash
+   emoji\Scripts\Activate.ps1
+   ```
+2. Navigate to the server directory:
+    ```
+    cd server
+    ```
+3. Install all dependencies:
+
+    ```
+    pip install -r requirements.txt
+    ```
+
+4. Run the Flask server:
+    ```
+    flask run
+    ```
+
+5. Open the app in your browser:
+    ```
+    http://127.0.0.1:5000/static/index.html
+    ```
