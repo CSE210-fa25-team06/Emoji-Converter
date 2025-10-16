@@ -13,14 +13,14 @@ async function translate() {
     const input = inputField.value;
     let response;
     if (emojiRadio.checked) { //from emoji to text
-        response = await fetch("/convertToText", {
+        response = await fetch("http://localhost:5000/convertToText", {
             method: "POST",
             headers: {"Content-Type" : "application/json"},
             body: JSON.stringify({text: input})
         });
     }
     else { //from text to emoji
-        response = await fetch ("/convertToEmojis", {
+        response = await fetch ("http://localhost:5000/convertToEmojis", {
             method: "POST",
             headers: {"Content-Type" : "application/json"},
             body: JSON.stringify({phrase: input})
